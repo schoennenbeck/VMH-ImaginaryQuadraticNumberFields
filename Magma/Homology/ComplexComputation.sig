@@ -1,0 +1,4 @@
+174,0
+S,ComputeComplexGL,This function will assemble all available information about the well-rounded retract and write it to a file (in GAP-readable format),0,2,0,0,1,0,0,0,0,VData,,0,0,298,,-38,-38,-38,-38,-38,-38
+S,ComputeComplexLowIndexSubgroup,This function will assemble all available information about the well-rounded retract for a subgroup of finite index in GL given by its index and a method to check for membership and write it to a file (in GAP-readable format),0,4,0,0,1,0,0,0,0,VData,,0,0,-1,,0,0,-1,,0,0,298,,-38,-38,-38,-38,-38,-38
+S,ComputeComplexLowIndexSubgroupFixtest,This function will assemble all available information about the well-rounded retract for a subgroup of finite index in GL given by its index and a method to check for membership and write it to a file (in GAP-readable format),0,4,0,0,1,0,0,0,0,VData,,0,0,-1,,0,0,-1,,0,0,298,,-38,-38,-38,-38,-38,-38

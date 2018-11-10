@@ -1,0 +1,42 @@
+{
+	Types.m
+
+	
+
+	BasicData.m
+	Initialize.m
+
+	
+	ImQuad
+	{
+		Functions
+		{
+			Lattice.m
+			Miscellaneous.m
+			Groups.m
+			MinimalClasses.m
+		}
+		Voronoi
+		{
+			Voronoi.m
+		}
+		MinClass
+		{
+			MinClass.m
+		}
+		WordProblem
+		{
+			WordProblem.m
+			Presentation.m
+		}
+	}
+	
+	Homology
+	{
+		ComplexComputation.m
+		DataAssembly.m
+		Functions.m
+		Gap-Conversions.m
+	}
+	
+}
