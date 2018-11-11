@@ -12,21 +12,16 @@ Some results of computations performed using these algorithms are already availa
 The algorithms we implemented deal with groups of the form $GL_n(\mathbb{Z}_K)$ for $n=1,2$ and $K$ an imaginary number field. The following algorithms are available:
 * Computing a presentation (i.e. generators and defining relations).
 * Solving constructive membership problems (i.e. writing a given element in these generators).
-* Computing a contractible G-complex which can be used for homology computations with the GAP-package [HAP](http://hamilton.nuigalway.ie/Hap/www/). These algorithms are also available for finite index subgroups of the base group (as long as we know the index and how to check for membership in this group).
+* Computing a contractible G-complex which can be used for homology computations with the GAP-package [HAP](http://hamilton.nuigalway.ie/Hap/www/). 
 
-## General Workflow
-Overall, the usability of the algorithms is not great and a lot of the general design of the Magma-package is pretty terrible. However, for reasons of me no longer working in academia and generally not wanting to do the refactoring it is going to stay this way for the foresesable future. If you are willing to overlook these weaknesses, performing computations with our packages works as follows:
-1. Decide on the field you want to work over and the dimension you have in mind (due to the computational complexity only 2 and 3 actually work).
-2. Edit the file BasicData.m accordingly (i.e. provide the dimension n, and the negative integer d whose square-root you want to have in the field)
-3. Start Magma and attach the package.
-4. Start by calling V:=VoronoiAlgorithm(); This is the initial computation that is needed for everything that follows.
-5. If you are only interested in presentations and constructive membership you can do all your computations in Magma. Otherwise you will use some functions (described later) to write some files describing a certain combinatorial structure.
-6. These files can be read using the GAP-functions we provide and can be used to obtain (or write to file) contractible G-complexes for use with HAP.
+Most of these algorithms are also available for finite index subgroups of the base group (as long as we know the index and how to check for membership in this group).
+
 
 ## Usage
+Overall, the usability of the algorithms is not great and a lot of the general design of the Magma-package is pretty terrible. However, for reasons of me no longer working in academia and generally not wanting to do the refactoring it is going to stay this way for the foresesable future. If you are willing to overlook these weaknesses, performing computations with our packages works as follows:
 
 ### General Setup
-1. Choose the dimension $n$ (let's say $2$) and the negative integer $d$ (let's say $-10$) whose square-root defines $K$. We will need to edit the file BasicData.m to make this known to Magma. There are three values that need to be set in this file. However, for the time being we will ignore the Steinitz argument; setting it to $1$ simply means we want to work with $\GL_n(\mathbb{Z}_K)$ instead of certain other arithmetic subgroups of $\GL_n(K)$. Edit the file BasicData.m so that it reads:
+1. Choose the dimension $n$ (let's say $2$ since only $2$ and $3$ are actually feasible) and the negative integer $d$ (let's say $-10$) whose square-root defines $K$. We will need to edit the file BasicData.m to make this known to Magma. There are three values that need to be set in this file. However, for the time being we will ignore the Steinitz argument; setting it to $1$ simply means we want to work with $\GL_n(\mathbb{Z}_K)$ instead of certain other arithmetic subgroups of $\GL_n(K)$. Edit the file BasicData.m so that it reads:
 
         n:=2; d:=-10; steinitz:=1;
 2. Open Magma and initialize the basic setup by calling:
@@ -51,3 +46,35 @@ To do this call:
 
         m := SolveWordProblem(M, V)
         
+### Constructing a contractible G-complex
+This workflow is a little messier and requires us to write things to a text-file which will later be used by GAP. We again assume that we already have the general setup ready.
+1. If we want to work with the full group, i.e. $\GL_n(\mathbb{Z}_K)$ simply call:
+
+        ComputeComplexGL("path/to/store/filename", V)
+2. If we want to work with a finite index subgroup. We need a function checking for membership in this subgroup. For example if we have an ideal I and want the subgroup of matrices of determinant 1 whose lower left entry is in I we could define:
+
+        CheckMembership := func<x| IsInSL(x) and x[2][1] in I>;
+3. Moreover we need the index of this subgroup in the full group (this is usually known to us) and a system of left-coset-representatives of the subgroup in the full group. You can either choose to provide your own favorite system of representatives or call the following command (note that this will run forever if the index you provide is larger than the actual index):
+
+        Reps:=SystemOfRepresentativesFiniteIndex(V`MultFreeList,CheckMembership,index);
+        
+4. Now constructing the file can be done by calling:
+
+        ComputeComplexLowIndexSubgroup("path/to/store/filename", Reps, CheckMembership , V);
+        
+**Now we switch over to GAP.**
+
+1. To get the necessary functionalities call (ignore all warnings, I tried to get rid of them at some point but just could not be bothered):
+
+        LoadPackage("HAP");
+        Read("path/to/gapstuff/ReadWellRoundedComplex.gi");
+        
+2. To get the contractible G-complex (non-free G-resolution) up to dimension 'length' (can be arbitrarily high without actually hurting performance) we constructed in Magma call:
+
+        R := ResolutionFromWellRoundedComplex(file, length);
+        
+3. This gives you a non-free G-resolution in HAP which you can work with in the usual way. For instance you could compute a free resolution (of the integers) by calling
+
+        F := FreeGResolution(R, length);
+        
+4. We provide two more GAP-functionalities. In the file 'QuotientComplex.gi' we define a function QuotientComplex which takes in a contractible G-complex and a central subgroup of G acting trivially on the complex and outputs a contractible complex for the quotient group. Moreover, the file 'WriteComplex.gi' defines a function WriteComplex taking in a contractible G-complex and a filename and stores the contractible G-complex in HAP-readable format in the file (eliminating the need to use our GAP-functionalities when sharing complexes with other people).
