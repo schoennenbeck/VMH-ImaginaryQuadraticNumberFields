@@ -78,3 +78,7 @@ This workflow is a little messier and requires us to write things to a text-file
         F := FreeGResolution(R, length);
         
 4. We provide two more GAP-functionalities. In the file 'QuotientComplex.gi' we define a function QuotientComplex which takes in a contractible G-complex and a central subgroup of G acting trivially on the complex and outputs a contractible complex for the quotient group. Moreover, the file 'WriteComplex.gi' defines a function WriteComplex taking in a contractible G-complex and a filename and stores the contractible G-complex in HAP-readable format in the file (eliminating the need to use our GAP-functionalities when sharing complexes with other people).
+
+## Additional comments
+1. Why the hell can I not use Latex in the ReadMe?
+2. License: No clue. If you use these algorithms for your research please cite the corresponding papers. If you use these algorithms for commercial purposes please let me know, I will be mightily impressed that you found a real world use-case...
