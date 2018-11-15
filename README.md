@@ -6,7 +6,7 @@ Magma and GAP methods for working with arithmetic groups over imaginary quadrati
 
 The implementation was primarily done by Oliver Braun and Sebastian Schönnenbeck during their time as doctoral students at RWTH Aachen University funded by the DFG Research Training Group "Experimental and constructive algebra".
 
-Some results of computations performed using these algorithms are already available in our [database](http://www.math.rwth-aachen.de/~Oliver.Braun/unitgroups/). When (not if) you find a bug, feel free to open an issue or try to fix it yourself (could luck reading our code) and open a pull request. For the time being this software is offered as is.
+Some results of computations performed using these algorithms are already available in our [database](http://www.math.rwth-aachen.de/~Oliver.Braun/unitgroups/). When (not if) you find a bug, feel free to open an issue or try to fix it yourself (good luck reading our code) and open a pull request. For the time being this software is offered as is.
 
 ## Overview
 The algorithms we implemented deal with groups of the form $GL_n(\mathbb{Z}_K)$ for $n=1,2$ and $K$ an imaginary number field. The following algorithms are available:
