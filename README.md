@@ -1,4 +1,4 @@
-# VMH
+# VMH-ImaginaryQuadraticNumberFields
 Magma and GAP methods for working with arithmetic groups over imaginary quadratic number fields. These methods are described in the following articles:
 * [Perfect lattices over imaginary quadratic number fields](http://de.arxiv.org/abs/1304.0559) (O. Braun and R. Coulangeon, Mathematics of Computation, 2015)
 * [Computing in arithmetic groups with Voronoi's algorithm](https://arxiv.org/abs/1407.6234) (O. Braun, R. Coulangeon, G. Nebe and S. Schönnenbeck, Journal of Algebra, 2015)
@@ -9,7 +9,7 @@ The implementation was primarily done by Oliver Braun and Sebastian Schönnenbec
 Some results of computations performed using these algorithms are already available in our [database](http://www.math.rwth-aachen.de/~Oliver.Braun/unitgroups/). When (not if) you find a bug, feel free to open an issue or try to fix it yourself (good luck reading our code) and open a pull request. For the time being this software is offered as is.
 
 ## Overview
-The algorithms we implemented deal with groups of the form $GL_n(\mathbb{Z}_K)$ for $n=1,2$ and $K$ an imaginary number field. The following algorithms are available:
+The algorithms we implemented deal with groups of the form $GL_n(\mathbb{Z}_K)$ for $n=2,3$ and $K$ an imaginary number field. The following algorithms are available:
 * Computing a presentation (i.e. generators and defining relations).
 * Solving constructive membership problems (i.e. writing a given element in these generators).
 * Computing a contractible G-complex which can be used for homology computations with the GAP-package [HAP](http://hamilton.nuigalway.ie/Hap/www/). 
@@ -82,3 +82,4 @@ This workflow is a little messier and requires us to write things to a text-file
 ## Additional comments
 1. Why the hell can I not use Latex in the ReadMe?
 2. License: No clue. If you use these algorithms for your research please cite the corresponding papers. If you use these algorithms for commercial purposes please let me know, I will be mightily impressed that you found a real world use-case...
+3. In case you were wondering: VMH stands for Voronoi, Minimal Classes, and Homology.
