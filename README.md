@@ -12,7 +12,7 @@ Some results of computations performed using these algorithms are already availa
 The algorithms we implemented deal with groups of the form $\operatorname{GL}_n(\mathbb{Z}_K)$ for $n=2,3$ and $K$ an imaginary number field. The following algorithms are available:
 * Computing a presentation (i.e. generators and defining relations).
 * Solving constructive membership problems (i.e. writing a given element in these generators).
-* Computing a contractible G-complex which can be used for homology computations with the GAP-package [HAP](http://hamilton.nuigalway.ie/Hap/www/). 
+* Computing a contractible $G$-complex which can be used for homology computations with the GAP-package [HAP](http://hamilton.nuigalway.ie/Hap/www/). 
 
 Most of these algorithms are also available for finite index subgroups of the base group (as long as we know the index and how to check for membership in this group).
 
@@ -34,11 +34,11 @@ If we already have the basic setup from above, computing a presentation works as
 
         G,g := Presentation(V)
 
-Now G is a finitely presented group and g a homomorphism from G to the matrix group we are interested in. There are a couple of keyword arguments to this command:
-* simplify (default: true)  specifies whether Magma should try to simplify the presentation before returning it.
-* projective (default: false)  specifies whether you want to compute the quotient modulo -1 instead of the matrix group
-* SL (default: false)  specifies if you want to compute a presentation of the special linear group instead of the general linear group.
-* CheckMembership (default: 0). Here you can provide a function checking an element of the full matrix group for membership in a (finite index) subgroup. If you do a presentation of this subgroup is computed instead of a presentation for the full group.
+Now `G` is a finitely presented group and `g` a homomorphism from `G` to the matrix group we are interested in. There are a couple of keyword arguments to this command:
+* `simplify` (default: true)  specifies whether Magma should try to simplify the presentation before returning it.
+* `projective` (default: false)  specifies whether you want to compute the quotient modulo -1 instead of the matrix group
+* `SL` (default: false)  specifies if you want to compute a presentation of the special linear group instead of the general linear group.
+* `CheckMembership` (default: 0). Here you can provide a function checking an element of the full matrix group for membership in a (finite index) subgroup. If you do a presentation of this subgroup is computed instead of a presentation for the full group.
 
 ### Solving constructive membership problems
 We suppose we already have the presentation from the last step (if not it is actually computed when you first try to solve an constructive membership problem). Given an element $M \in \operatorname{GL}_n(\mathbb{Z}_K)$ we now want to find $m \in G$ such that $g(m) = M$.
@@ -69,15 +69,15 @@ This workflow is a little messier and requires us to write things to a text-file
         LoadPackage("HAP");
         Read("path/to/gapstuff/ReadWellRoundedComplex.gi");
         
-2. To get the contractible G-complex (non-free G-resolution) up to dimension 'length' (can be arbitrarily high without actually hurting performance) we constructed in Magma call:
+2. To get the contractible $G$-complex (non-free $G$-resolution) up to dimension 'length' (can be arbitrarily high without actually hurting performance) we constructed in Magma call:
 
         R := ResolutionFromWellRoundedComplex(file, length);
         
-3. This gives you a non-free G-resolution in HAP which you can work with in the usual way. For instance you could compute a free resolution (of the integers) by calling
+3. This gives you a non-free $G$-resolution in HAP which you can work with in the usual way. For instance you could compute a free resolution (of the integers) by calling
 
         F := FreeGResolution(R, length);
         
-4. We provide two more GAP-functionalities. In the file 'QuotientComplex.gi' we define a function QuotientComplex which takes in a contractible G-complex and a central subgroup of G acting trivially on the complex and outputs a contractible complex for the quotient group. Moreover, the file 'WriteComplex.gi' defines a function WriteComplex taking in a contractible G-complex and a filename and stores the contractible G-complex in HAP-readable format in the file (eliminating the need to use our GAP-functionalities when sharing complexes with other people).
+4. We provide two more GAP-functionalities. In the file 'QuotientComplex.gi' we define a function QuotientComplex which takes in a contractible $G$-complex and a central subgroup of $G$ acting trivially on the complex and outputs a contractible complex for the quotient group. Moreover, the file 'WriteComplex.gi' defines a function WriteComplex taking in a contractible $G$-complex and a filename and stores the contractible $G$-complex in HAP-readable format in the file (eliminating the need to use our GAP-functionalities when sharing complexes with other people).
 
 ## Additional comments
 1. ~~Why the hell can I not use Latex in the ReadMe?~~ Finally! 
